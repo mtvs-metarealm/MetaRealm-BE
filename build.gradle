@@ -28,8 +28,11 @@ ext {
 }
 
 dependencies {
+    // 스프링 부트 웹 어플리케이션 개발을 위한 필수 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    // Spring Security 관련 설정은 나중에 프로젝트가 어느정도 마무리되고 나서 설정하겠습니다
+//    Spring Security 관련 설정은 나중에 프로젝트가 어느정도 마무리되고 나서 설정하겠습니다
 //    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
