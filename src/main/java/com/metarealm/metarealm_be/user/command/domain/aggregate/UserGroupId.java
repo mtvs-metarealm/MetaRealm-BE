@@ -14,9 +14,8 @@ import java.util.Objects;
 @Getter
 public class UserGroupId implements Serializable {
 
-    private Long groupId;
     private Long userId;
-
+    private Long groupId;
 
     @Override
     public boolean equals(Object o) {

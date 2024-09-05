@@ -1,13 +1,14 @@
 package com.metarealm.metarealm_be.user.command.application.controller;
 
 import com.metarealm.metarealm_be.user.command.application.service.UserService;
+import com.metarealm.metarealm_be.user.command.domain.aggregate.User;
 import com.metarealm.metarealm_be.user.command.domain.dto.UserRequestDTO;
+import com.metarealm.metarealm_be.user.command.domain.dto.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/signup")
@@ -26,6 +27,14 @@ public class SignUpController {
         UserRequestDTO createUser = userService.createUser(userRequestDTO);
         return ResponseEntity.ok(createUser);
     }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponseDTO>> getUsers() {
+        List<UserResponseDTO> userResponseDTOS = userService.findAllUser();
+        return ResponseEntity.ok(userResponseDTOS);
+    }
+
+
 
 
 }
