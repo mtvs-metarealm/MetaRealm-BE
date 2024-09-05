@@ -2,9 +2,11 @@ package com.metarealm.metarealm_be.ai.service;
 
 import com.metarealm.metarealm_be.ai.client.AIClient;
 import com.metarealm.metarealm_be.ai.dto.AIResponseDto;
-import java.io.File;
+import com.metarealm.metarealm_be.ai.dto.AiIndexEndPointResponseDto;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class AIService {
@@ -16,7 +18,11 @@ public class AIService {
         this.aiClient = aiClient;
     }
 
-    public AIResponseDto getAIResponse() {
-        return aiClient.getAIResponse(new File("mp3/baborayo.mp3"));
+    public AIResponseDto getAIResponse(MultipartFile multipartFile) throws IOException {
+        return aiClient.getAIResponse(multipartFile);
+    }
+
+    public AiIndexEndPointResponseDto testDefaultIndexEndPoint() {
+        return aiClient.testDefaultIndexEndPoint();
     }
 }
