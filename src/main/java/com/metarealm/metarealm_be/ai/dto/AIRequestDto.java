@@ -7,5 +7,5 @@ import lombok.Getter;
 @Builder
 @Getter
 public class AIRequestDto {
-    File files;
+    File voice;
 }
