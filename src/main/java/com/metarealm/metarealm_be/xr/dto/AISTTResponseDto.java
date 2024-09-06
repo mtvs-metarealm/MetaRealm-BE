@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class XRTestResponseDto {
+public class AISTTResponseDto {
 
-    String testMessage;
+    private String messages;
 
     @Builder
-    public XRTestResponseDto(String testMessage) {
-        this.testMessage = testMessage;
+    public AISTTResponseDto(String messages) {
+        this.messages = messages;
     }
 }
