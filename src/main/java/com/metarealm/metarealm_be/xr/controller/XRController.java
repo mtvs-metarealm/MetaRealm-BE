@@ -35,7 +35,7 @@ public class XRController {
     @PostMapping("/stt")
     public AISTTResponseDto testAudioFiles(MultipartFile voice) {
         AISTTResponseDto aisttResponseDto = xrService.stt(voice);
-        log.info(aisttResponseDto.toString());
+        log.info("XR이 STT 메서드 호출\nAISTTResponseDto : {}", aisttResponseDto.toString());
         return aisttResponseDto;
     }
 }
