@@ -12,15 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
+    @Autowired
     private DetailsService detailsService;
-    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public CustomAuthenticationProvider(DetailsService detailsService,
-        BCryptPasswordEncoder passwordEncoder) {
-        this.detailsService = detailsService;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication)
