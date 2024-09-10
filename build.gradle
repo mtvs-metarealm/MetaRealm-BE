@@ -37,6 +37,9 @@ dependencies {
     // Spring Security 관련 설정은 나중에 프로젝트가 어느정도 마무리되고 나서 설정하겠습니다
     // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth2 클라이언트 지원 (추후 추가 예정)
     implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티 스타터 (보안 기능)
+    implementation "io.jsonwebtoken:jjwt:0.9.1"
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation' // 데이터 검증을 위한 스타터
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3' // MyBatis를 통합하기 위한 스타터
@@ -49,7 +52,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // 스프링 부트 테스트 지원
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3' // MyBatis 테스트 지원
-    // testImplementation 'org.springframework.security:spring-security-test' // 스프링 시큐리티 테스트 지원 (추후 추가 예정)
+    testImplementation 'org.springframework.security:spring-security-test' // 스프링 시큐리티 테스트 지원 (추후 추가 예정)
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit 플랫폼 런처 (테스트 실행)
 
     // MockMultipartFile을 사용하기 위한 의존성 추가
