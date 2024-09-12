@@ -15,6 +15,6 @@ public interface AIClient {
     @GetMapping(value = "/")
     AITestResponseDto test();
 
-    @PostMapping(value = "/stt", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/stt-chat", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     AISTTResponseDto stt(@RequestPart("voice") MultipartFile voice);
 }

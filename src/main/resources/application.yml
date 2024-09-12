@@ -1,20 +1,27 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/testdb
-    username: root
-    password: 1234
+  application:
+    name: metarealm_be # 애플리케이션 이름 설정
   servlet:
     multipart:
-      max-file-size: 1000MB
-      max-request-size: 1000MB
+      enabled: true # 파일 업로드 기능 활성화
+      max-file-size: 10MB # 최대 파일 크기 설정
+      max-request-size: 10MB # 최대 요청 크기 설정
   jpa:
-    show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none # Hibernate의 DDL 자동 생성 설정 (none: 자동 생성 안 함)
     properties:
       hibernate:
-        format_sql: true
+        show_sql: true # SQL 쿼리 로그 출력 설정
+        format_sql: true # SQL 쿼리 포맷팅 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver # MySQL 드라이버 클래스 이름
+    url: jdbc:mysql://localhost:3306/metarealmdb # MySQL 데이터베이스 URL
+    username: ohgiraffers # 데이터베이스 사용자 이름
+    password: ohgiraffers # 데이터베이스 비밀번호
 
-mybatis:
-  mapper-locations: classpath:/mappers/*
+server:
+  port: 7777 # 서버 포트 설정 (여기서는 7777로 설정)
+
+jwt:
+  key: sdfadsfsdfadsfasdfasdfasdfsdfnw4tn23n4on1k5n1k2n14369hn # JWT 키 설정
+  time: 86400000 # JWT 유효 시간 설정 (밀리초 단위, 여기서는 1일)
