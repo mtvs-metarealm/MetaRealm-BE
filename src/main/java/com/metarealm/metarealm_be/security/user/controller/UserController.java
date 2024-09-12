@@ -24,16 +24,16 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity singup(@RequestBody User user){
+    public ResponseEntity singup(@RequestBody User user) {
 
         user.setUserPass(passwordEncoder.encode(user.getUserPass()));
         user.setState("Y");
-        User value  = userRepository.save(user);
+        User value = userRepository.save(user);
 
-        if(Objects.isNull(value)){
+        if (Objects.isNull(value)) {
             return ResponseEntity.status(500).body("회원가입 실패");
-        }else{
-            return ResponseEntity.ok("회원가입 실패");
+        } else {
+            return ResponseEntity.ok("Successes to register user");
         }
 
     }
