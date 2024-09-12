@@ -23,6 +23,8 @@ public class AIController {
     // 1. 테스트
     @GetMapping("test")
     public AITestResponseDto test() {
+        AITestResponseDto aiTestResponseDto = aiService.test();
+        log.info("aiTestResponseDto : {}", aiTestResponseDto.toString());
         return aiService.test();
     }
 }

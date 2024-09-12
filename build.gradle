@@ -9,62 +9,58 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17) // Java 17 버전 사용
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
 configurations {
     compileOnly {
-        extendsFrom annotationProcessor // annotationProcessor와 함께 사용
+        extendsFrom annotationProcessor
     }
 }
 
 repositories {
-    mavenCentral() // Maven 중앙 저장소에서 의존성 다운로드
+    mavenCentral()
 }
 
 ext {
-    set('springCloudVersion', "2023.0.3") // Spring Cloud 버전 설정
+    set('springCloudVersion', "2023.0.3")
 }
 
 dependencies {
     // 스프링 부트 웹 어플리케이션 개발을 위한 필수 의존성
-    implementation 'org.springframework.boot:spring-boot-starter-web' // 스프링 웹 애플리케이션 기본 스타터
-    implementation 'org.springframework:spring-web' // 스프링 웹 관련 기능
-    implementation 'org.springframework:spring-webmvc' // 스프링 MVC 기능 (웹 애플리케이션의 MVC 패턴 지원)
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA 지원을 위한 스프링 부트 스타터
-
-    // Spring Security 관련 설정은 나중에 프로젝트가 어느정도 마무리되고 나서 설정하겠습니다
-    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth2 클라이언트 지원 (추후 추가 예정)
-    implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티 스타터 (보안 기능)
-    implementation "io.jsonwebtoken:jjwt:0.9.1"
-    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
-    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-
-    implementation 'org.springframework.boot:spring-boot-starter-validation' // 데이터 검증을 위한 스타터
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3' // MyBatis를 통합하기 위한 스타터
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign' // OpenFeign을 사용하여 REST 클라이언트 생성
-
-    compileOnly 'org.projectlombok:lombok' // Lombok (코드 생성기) - 컴파일 시에만 필요
-    runtimeOnly 'com.h2database:h2' // H2 데이터베이스 (테스트 및 개발용 인메모리 DB)
-    runtimeOnly 'com.mysql:mysql-connector-j' // MySQL 데이터베이스 커넥터
-    annotationProcessor 'org.projectlombok:lombok' // Lombok을 위한 애너테이션 프로세서
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test' // 스프링 부트 테스트 지원
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3' // MyBatis 테스트 지원
-    testImplementation 'org.springframework.security:spring-security-test' // 스프링 시큐리티 테스트 지원 (추후 추가 예정)
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit 플랫폼 런처 (테스트 실행)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-webmvc' // 추가된 부분
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    Spring Security 관련 설정은 나중에 프로젝트가 어느정도 마무리되고 나서 설정하겠습니다
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+//    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // MockMultipartFile을 사용하기 위한 의존성 추가
-    testImplementation 'org.springframework:spring-test' // 스프링 테스트 지원
+    testImplementation 'org.springframework:spring-test'
+
+    // API 명세서 - Swagger 작성 위해
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 }
 
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}" // Spring Cloud 의존성 관리
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
 
 tasks.named('test') {
-    useJUnitPlatform() // JUnit 플랫폼 사용
+    useJUnitPlatform()
 }
