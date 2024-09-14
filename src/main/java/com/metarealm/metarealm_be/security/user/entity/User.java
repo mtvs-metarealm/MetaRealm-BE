@@ -2,6 +2,7 @@ package com.metarealm.metarealm_be.security.user.entity;
 
 import com.metarealm.metarealm_be.security.common.OhgiraffersRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +18,11 @@ public class User {
     private int userNo;
 
     @Column(name = "USER_ID")
+    @NotBlank
     private String userId;
 
     @Column(name = "USER_PASS")
+    @NotBlank
     private String userPass;
 
     @Column(name = "USER_NAME")

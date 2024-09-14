@@ -1,0 +1,25 @@
+### 회원가입
+POST http://localhost:7777/signup
+Content-Type: application/json
+
+{
+  "userId" : "kch4731@gmail.com",
+  "userPass" : "kch4731@gmail.com",
+  "userName" : "KCH",
+  "userEmail" : "kch4731@gmail.com",
+  "role" : "USER"
+}
+
+### 로그인
+POST http://localhost:7777/login
+Content-Type: application/json
+
+{
+  "id" : "kch4731@gmail.com",
+  "pass" : "kch4731@gmail.com"
+}
+
+### 테스트
+GET http://localhost:7777/test
+Content-Type: application/json
+Authorization: BEARER eyJkYXRlIjoxNzI2MTE3MTk5Njg4LCJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJSb2xlIjoiVVNFUiIsInN1YiI6Im9oZ2lyYWZmZXJzIHRva2VuIDogMSIsInVzZXJFbWFpbCI6ImtjaDQ3MzFAZ21haWwuY29tIiwidXNlck5hbWUiOiJLQ0giLCJleHAiOjE3MjYyMDM1OTl9.ZX4Gt8cLYCxtYtAQ-r_UgzfkuVzI-gjs4ljlSvfgsl4
