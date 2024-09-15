@@ -34,26 +34,27 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+        FilterChain chain) throws IOException, ServletException {
         /*
-        * 권한이 필요없는 리소스
-        * */
+         * 권한이 필요없는 리소스
+         * */
         List<String> roleLeessList = Arrays.asList(
-                "/signup"
+            "/signup"
         );
 
-        if(roleLeessList.contains(request.getRequestURI())){
-            chain.doFilter(request,response);
+        if (roleLeessList.contains(request.getRequestURI())) {
+            chain.doFilter(request, response);
             return;
         }
 
         String header = request.getHeader(AuthConstants.AUTH_HEADER);
 
         try {
-            if(header != null && !header.equalsIgnoreCase("")){
+            if (header != null && !header.equalsIgnoreCase("")) {
                 String token = TokenUtils.splitHeader(header);
 
-                if(TokenUtils.isValidToken(token)){
+                if (TokenUtils.isValidToken(token)) {
                     Claims claims = TokenUtils.getClaimsFormToken(token);
 
                     DetailsUser authentication = new DetailsUser();
@@ -64,18 +65,19 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                     user.setRole(OhgiraffersRole.valueOf(claims.get("Role").toString()));
                     authentication.setUser(user);
 
-                    AbstractAuthenticationToken authenticationToken = UsernamePasswordAuthenticationToken.authenticated(authentication, token, authentication.getAuthorities());
+                    AbstractAuthenticationToken authenticationToken = UsernamePasswordAuthenticationToken.authenticated(
+                        authentication, token, authentication.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetails(request));
 
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                    chain.doFilter(request,response);
-                }else{
+                    chain.doFilter(request, response);
+                } else {
                     throw new RuntimeException("Invalid token");
                 }
-            }else{
+            } else {
                 throw new RuntimeException("Token Not Found");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
             PrintWriter printWriter = response.getWriter();
@@ -88,7 +90,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     /**
      * 토큰 관련된 Exception 발생 시 예외 응답
-     * */
+     */
     private JSONObject jsonresponseWrapper(Exception e) {
         String resultMsg = "";
         if (e instanceof ExpiredJwtException) {
