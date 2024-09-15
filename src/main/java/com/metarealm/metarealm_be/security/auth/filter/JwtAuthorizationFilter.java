@@ -70,10 +70,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                     chain.doFilter(request,response);
                 }else{
-                    throw new RuntimeException("토큰이 유효하지 않습니다.");
+                    throw new RuntimeException("Invalid token");
                 }
             }else{
-                throw new RuntimeException("토큰이 존재하지 않습니다.");
+                throw new RuntimeException("Token Not Found");
             }
         }catch (Exception e){
             response.setCharacterEncoding("UTF-8");
