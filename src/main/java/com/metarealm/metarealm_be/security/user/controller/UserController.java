@@ -24,7 +24,7 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity singup(@RequestBody User user) {
+    public ResponseEntity<String> signup(@RequestBody User user) {
 
         user.setUserPass(passwordEncoder.encode(user.getUserPass()));
         user.setState("Y");
