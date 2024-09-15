@@ -1,15 +1,23 @@
 package com.metarealm.metarealm_be.security.user.entity;
 
 import com.metarealm.metarealm_be.security.common.OhgiraffersRole;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "TBL_USER")
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -17,7 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userNo;
 
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID", unique = true)
     @NotBlank
     private String userId;
 
@@ -43,9 +51,6 @@ public class User {
             return Arrays.asList(this.role.getRole().split(","));
         }
         return new ArrayList<>();
-    }
-
-    public User() {
     }
 
     public int getUserNo() {
