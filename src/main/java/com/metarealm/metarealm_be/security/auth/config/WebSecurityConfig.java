@@ -3,8 +3,8 @@ package com.metarealm.metarealm_be.security.auth.config;
 import com.metarealm.metarealm_be.security.auth.filter.CustomAuthenticationFilter;
 import com.metarealm.metarealm_be.security.auth.filter.JwtAuthorizationFilter;
 import com.metarealm.metarealm_be.security.auth.handler.CustomAuthFailUserHandler;
+import com.metarealm.metarealm_be.security.auth.handler.CustomAuthSuccessHandler;
 import com.metarealm.metarealm_be.security.auth.handler.CustomAuthenticationProvider;
-import com.metarealm.metarealm_be.security.auth.handler.CutomAuthSuccessHandler;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -102,8 +102,8 @@ public class WebSecurityConfig {
      * @return customAuthLoginSuccessHandler
      * */
     @Bean
-    public CutomAuthSuccessHandler customAuthLoginSuccessHandler(){
-        return new CutomAuthSuccessHandler();
+    public CustomAuthSuccessHandler customAuthLoginSuccessHandler(){
+        return new CustomAuthSuccessHandler();
     }
 
 
