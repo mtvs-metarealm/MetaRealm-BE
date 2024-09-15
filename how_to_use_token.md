@@ -87,7 +87,7 @@ Authorization: BEARER eyJkYXRlIjoxNzI2MTE3MTk5Njg4LCJ0eXBlIjoiand0IiwiYWxnIjoiSF
 #### 실패 시 응답
 ```json
 {
-    "reason": "토큰이 유효하지 않습니다.",
+    "reason": "Invalid Token",
     "message": "OTHER TOKEN ERROR",
     "status": 401
 }
