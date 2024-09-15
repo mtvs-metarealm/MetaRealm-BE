@@ -2,39 +2,39 @@ package com.metarealm.metarealm_be.security.auth.handler;
 
 import com.metarealm.metarealm_be.security.auth.model.DetailsUser;
 import com.metarealm.metarealm_be.security.common.AuthConstants;
-import com.metarealm.metarealm_be.security.common.utils.ConvertUtil;
 import com.metarealm.metarealm_be.security.common.utils.TokenUtils;
 import com.metarealm.metarealm_be.security.user.entity.User;
-import org.json.simple.JSONObject;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import org.json.simple.JSONObject;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 @Configuration
 public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        User user  = ((DetailsUser) authentication.getPrincipal()).getUser();
-        JSONObject jsonValue = (JSONObject) ConvertUtil.convertObjectToJsonObject(user);
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+        Authentication authentication) throws IOException /*, ServletException */ {
+        User user = ((DetailsUser) authentication.getPrincipal()).getUser();
+//        JSONObject jsonValue = (JSONObject) ConvertUtil.convertObjectToJsonObject(user); // XR 요청에 따라 지움
         HashMap<String, Object> responseMap = new HashMap<>();
 
         JSONObject jsonObject;
-        if(user.getState().equals("N")){
-            responseMap.put("userInfo", jsonValue);
-            responseMap.put("message","휴먼상태인 계정입니다.");
-        }else{
+        if (user.getState().equals("N")) {
+//            responseMap.put("userInfo", jsonValue); // XR 요청에 따라 지움
+            responseMap.put("message", "This account is dormant"); // 휴면 계정 상태일 때
+        } else {
             String token = TokenUtils.generateJwtToken(user);
-            responseMap.put("userInfo", jsonValue);
-            responseMap.put("message", "로그인 성공");
+//            responseMap.put("userInfo", jsonValue); // XR 요청에 따라 지움
+            responseMap.put("message", "Successes to login");
 
             response.addHeader(AuthConstants.AUTH_HEADER, AuthConstants.TOKEN_TYPE + " " + token);
+            responseMap.put("token", AuthConstants.TOKEN_TYPE + " " + token);
         }
 
         jsonObject = new JSONObject(responseMap);
