@@ -122,7 +122,7 @@ public class TokenUtils {
 
         claims.put("userName", user.getUserName());
         claims.put("Role", user.getRole());
-        claims.put("userEmail",user.getUserEmail());
+//        claims.put("userEmail",user.getUserEmail());
 
         return claims;
     }
