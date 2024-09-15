@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 @Configuration
-public class CutomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
