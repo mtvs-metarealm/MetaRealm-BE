@@ -1,5 +1,6 @@
 package com.metarealm.metarealm_be.security.user.controller;
 
+import com.metarealm.metarealm_be.security.user.dto.UserRegisterResponseDto;
 import com.metarealm.metarealm_be.security.user.entity.User;
 import com.metarealm.metarealm_be.security.user.repository.UserRepository;
 import java.util.Objects;
@@ -26,16 +27,23 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody User user) {
+    public ResponseEntity<UserRegisterResponseDto> signup(@RequestBody User user) {
 
         user.setUserPass(passwordEncoder.encode(user.getUserPass()));
         user.setState("Y");
         User value = userRepository.save(user);
 
+
         if (Objects.isNull(value)) {
-            return ResponseEntity.status(500).body("회원가입 실패");
+            UserRegisterResponseDto userRegisterResponseDto = UserRegisterResponseDto.builder()
+                .message("Failed to Register")
+                .build();
+            return ResponseEntity.status(500).body(userRegisterResponseDto);
         } else {
-            return ResponseEntity.ok("Successes to register user");
+            UserRegisterResponseDto userRegisterResponseDto = UserRegisterResponseDto.builder()
+                .message("Successes to register user")
+                .build();
+            return ResponseEntity.ok(userRegisterResponseDto);
         }
 
     }
