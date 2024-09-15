@@ -17,11 +17,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
         super.setAuthenticationManager(authenticationManager);
     }
+
     /**
      * 지정된 url 요청시 해당 요청을 가로채서 검증 로직을 수행하는 메서드
-     * */
+     */
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request,
+        HttpServletResponse response) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authRequest;
 
         try {
@@ -33,17 +35,19 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         return this.getAuthenticationManager().authenticate(authRequest);
     }
+
     /**
      * 사용자의 로그인 리소스 요청시 요청 정보를 임시 토큰에 저장하는 메서드
      *
      * @param request - httpServletRequest
      * @return UserPasswordAuthenticationToken
      * @throw Excpetion e
-     * */
-    private UsernamePasswordAuthenticationToken getAuthRequest(HttpServletRequest request) throws IOException {
+     */
+    private UsernamePasswordAuthenticationToken getAuthRequest(HttpServletRequest request)
+        throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE,true);
+        objectMapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
         LoginDto user = objectMapper.readValue(request.getInputStream(), LoginDto.class);
 
         return new UsernamePasswordAuthenticationToken(user.getId(), user.getPass());
