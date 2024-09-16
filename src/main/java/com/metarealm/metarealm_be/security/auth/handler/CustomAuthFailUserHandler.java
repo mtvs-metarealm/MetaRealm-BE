@@ -44,34 +44,34 @@ public class CustomAuthFailUserHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
         AuthenticationException exception) throws IOException, ServletException {
         JSONObject jsonObject;
-        String failMsg;
+        String message;
 
         if (exception instanceof AuthenticationServiceException) {
             // 사용자의 로그인 또는 인증 처리 과정에서 문제가 발생한다.
-            failMsg = "존재하지 않는 사용자입니다.";
+            message = "User does not exist.";
         } else if (exception instanceof BadCredentialsException) {
             // BadCredentialsException 오류는 사용자의 아이디가 DB에 존재하지 않는 경우 비밀번호가 맞지 않는 경우 발생한다.
-            failMsg = "아이디 또는 비밀번호가 틀립니다.";
+            message = "Incorrect username or password.";
         } else if (exception instanceof LockedException) {
             // 계정이 잠긴 경우 발생하는 오류이다.
-            failMsg = "잠긴 계정입니다.";
+            message = "Account is locked.";
         } else if (exception instanceof DisabledException) {
             // 비활성화 된 계정에서 발생한다.
-            failMsg = "비활성화된 계정입니다.";
+            message = "Account is disabled.";
         } else if (exception instanceof AccountExpiredException) {
             // 계정 만료시 발생하는 에러
-            failMsg = "만료된 계정입니다.";
+            message = "Account has expired.";
         } else if (exception instanceof CredentialsExpiredException) {
             // 자격 증명이 만료되는 경우 발생
-            failMsg = "자격증명이 만료되었습니다.";
+            message = "Credentials have expired.";
         } else if (exception instanceof AuthenticationCredentialsNotFoundException) {
-            //보안 컨텍스트에 인증 객체가 존재하지 않거나 인증 정보가 없는 상태에서 보안처리된 리소스에 접근하는 경우 발생
-            failMsg = "인증 요청이 거부되었습니다.";
+            // 보안 컨텍스트에 인증 객체가 존재하지 않거나 인증 정보가 없는 상태에서 보안처리된 리소스에 접근하는 경우 발생
+            message = "Authentication request has been denied.";
         } else if (exception instanceof UsernameNotFoundException) {
             // db에 사용자의 정보가 없는 경우 발생하는 오류이다
-            failMsg = "존재하지 않는 이메일 입니다.";
+            message = "Email does not exist.";
         } else {
-            failMsg = "정의되있는 케이스의 오류가 아닙니다.";
+            message = "This is not an error defined in the cases.";
         }
 
         response.setCharacterEncoding("UTF-8");
@@ -79,7 +79,7 @@ public class CustomAuthFailUserHandler implements AuthenticationFailureHandler {
         PrintWriter printWriter = response.getWriter();
 
         HashMap<String, Object> resultMap = new HashMap<>();
-        resultMap.put("failType", failMsg);
+        resultMap.put("message", message);
 
         jsonObject = new JSONObject(resultMap);
 

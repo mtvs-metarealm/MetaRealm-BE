@@ -1,6 +1,5 @@
 package com.metarealm.metarealm_be.security.user.controller;
 
-
 import com.metarealm.metarealm_be.security.user.dto.UserTokenValidationResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
