@@ -35,6 +35,8 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
 
             response.addHeader(AuthConstants.AUTH_HEADER, AuthConstants.TOKEN_TYPE + " " + token);
             responseMap.put("token", AuthConstants.TOKEN_TYPE + " " + token);
+
+            responseMap.put("userName", user.getUserName());
         }
 
         jsonObject = new JSONObject(responseMap);
