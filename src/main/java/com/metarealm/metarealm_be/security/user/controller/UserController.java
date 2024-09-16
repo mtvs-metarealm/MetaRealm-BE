@@ -50,6 +50,5 @@ public class UserController {
                 .build();
             return ResponseEntity.ok(userRegisterResponseDto);
         }
-
     }
 }
