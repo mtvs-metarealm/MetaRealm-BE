@@ -1,5 +1,6 @@
 package com.metarealm.metarealm_be.security.user.controller;
 
+import com.metarealm.metarealm_be.exception.UserIdAlreadyExistsException;
 import com.metarealm.metarealm_be.security.user.dto.UserRegisterResponseDto;
 import com.metarealm.metarealm_be.security.user.entity.User;
 import com.metarealm.metarealm_be.security.user.repository.UserRepository;
@@ -29,10 +30,14 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<UserRegisterResponseDto> signup(@RequestBody User user) {
 
+        if (userRepository.existsByUserId(user.getUserId())) {
+            throw new UserIdAlreadyExistsException("User ID already exists");
+        }
+
         user.setUserPass(passwordEncoder.encode(user.getUserPass()));
         user.setState("Y");
-        User value = userRepository.save(user);
 
+        User value = userRepository.save(user);
 
         if (Objects.isNull(value)) {
             UserRegisterResponseDto userRegisterResponseDto = UserRegisterResponseDto.builder()
