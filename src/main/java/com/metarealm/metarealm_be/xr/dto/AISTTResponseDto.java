@@ -10,10 +10,10 @@ import lombok.ToString;
 @ToString
 public class AISTTResponseDto {
 
-    private String messages;
+    private String response;
 
     @Builder
-    public AISTTResponseDto(String messages) {
-        this.messages = messages;
+    public AISTTResponseDto(String response) {
+        this.response = response;
     }
 }
